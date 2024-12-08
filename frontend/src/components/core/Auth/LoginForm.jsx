@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
@@ -12,7 +12,20 @@ function LoginForm() {
     email: "",
     password: "",
   })
-
+  const btnTitle = [
+    "Add Instructor Email and Password",
+    "Add Student Email and Password "
+  ]
+  const testData = [
+    {
+    email: "kanop7665@gmail.com",
+    password: "1234"
+    },
+    {
+      email: "guruteach46@gmail.com",
+    password: "1234",
+    }
+  ]
   const [showPassword, setShowPassword] = useState(false)
 
   const { email, password } = formData
@@ -29,7 +42,11 @@ function LoginForm() {
     dispatch(login(email, password, navigate))
   }
 
+  useEffect(()=>{
+    setFormData(testData[0])
+  },[])
   return (
+    <>
     <form
       onSubmit={handleOnSubmit}
       className="mt-6 flex w-full flex-col gap-y-4"
@@ -90,7 +107,22 @@ function LoginForm() {
       >
         Sign In
       </button>
+
     </form>
+      <p  className="text-white mt-5 text-justify">
+        <b>Note:</b> 
+        <span className="text-richblack-100"> Don't use personal details.This website only for Tesing.
+          login with provided details as student. if you want to login as instructor click on blue button to add instructor detail.
+        </span>
+      </p>
+      <button onClick={()=>{
+        if(formData.email==testData[0].email)setFormData(testData[1])
+          else setFormData(testData[0])
+      }} className="mt-6 rounded-[8px] bg-blue-400 text-white py-[8px] px-[12px] font-medium ">{
+        formData.email==testData[0].email?btnTitle[0]:btnTitle[1]
+      }</button>
+    </>
+    
   )
 }
 
