@@ -18,13 +18,16 @@ const PORT = process.env.PORT || 4000;
 
 //database connect
 database.connect();
+console.log(process.env.FRONTEND_URI)
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
 		origin:process.env.FRONTEND_URI,
-		credentials:true,
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+		optionsSuccessStatus: 200,
+		credentials:true
 	})
 )
 
