@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+console.log("change name")
 const SubSectionSchema = new mongoose.Schema({
 	title: { type: String },
 	timeDuration: { type: String },
